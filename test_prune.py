@@ -4,7 +4,7 @@ from torchvision.transforms import functional as F
 from data.data_RGB import get_test_data
 from skimage.metrics import peak_signal_noise_ratio
 from skimage.metrics import structural_similarity as SSIM
-from model.MSSNet_eval import DeblurNet
+from model.MSSNet_eval_pruned import DeblurNet
 import torch.nn.utils.prune as prune
 import os
 import argparse
@@ -12,15 +12,15 @@ import time
 import numpy as np
 
 parser = argparse.ArgumentParser(description='DeblurNet test')
-parser.add_argument("--test_datalist",type=str, default='./datalist/datalist_gopro_testset.txt')
+parser.add_argument("--test_datalist",type=str, default='./datalist/datalist_gopro_custom.txt')
 parser.add_argument("--data_root_dir",type=str,default='./dataset')
 parser.add_argument("--gpu",type=int, default=0)
-parser.add_argument("--load_dir",type=str,default='./checkpoint/prune_state.pth')
+parser.add_argument("--load_dir",type=str,default='./checkpoint/student_ratio2_prune.pth')
 parser.add_argument("--outdir",type=str,default='./result/MSSNet/')
 
-parser.add_argument("--wf",type=int,default=54)
-parser.add_argument("--scale",type=int,default=42)
-parser.add_argument("--vscale",type=int,default=42)
+parser.add_argument("--wf",type=int,default=27)
+parser.add_argument("--scale",type=int,default=21)
+parser.add_argument("--vscale",type=int,default=21)
 
 parser.add_argument("--is_save", action="store_true")
 parser.add_argument("--is_eval", action="store_true")
